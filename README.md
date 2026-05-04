@@ -2,6 +2,63 @@
 
 Эта коллекция содержит популярные приложения для Android TV, оптимизированные для просмотра медиаконтента на больших экранах.
 
+## 🚀 Система метаданных
+
+Этот репозиторий использует автоматическую систему метаданных для отображения профессиональных описаний приложений вместо технических имен файлов.
+
+### Как это работает
+
+1. **При запуске** приложение загружает APK файлы и метаданные из `apps_metadata.json`
+2. **Связывание** метаданных связываются с APK файлами по имени файла
+3. **Отображение** UI показывает красивые названия и описания приложений
+4. **Fallback** система работает даже без доступа к метаданным
+
+### Структура метаданных
+
+```json
+{
+  "apps": {
+    "имя_файла.apk": {
+      "name": "Красивое название",
+      "version": "1.0",
+      "category": "media_player",
+      "description": "Краткое описание",
+      "long_description": "Подробное описание...",
+      "features": ["Функция 1", "Функция 2"],
+      "size": "10 MB",
+      "rating": 4.5,
+      "tags": ["тег1", "тег2"]
+    }
+  }
+}
+```
+
+### Для разработчиков
+
+Чтобы интегрировать систему метаданных:
+
+```javascript
+const METADATA_URL = "https://raw.githubusercontent.com/aktmaster12-lang/Android-TV/main/apps_metadata.json";
+
+async function loadMetadata() {
+  try {
+    const response = await fetch(METADATA_URL);
+    const metadata = await response.json();
+    return metadata.apps;
+  } catch (error) {
+    console.log("Fallback: using file names");
+    return {};
+  }
+}
+
+function getAppDisplayName(fileName, metadata) {
+  const appData = metadata[fileName];
+  return appData ? appData.name : fileName.replace('.apk', '');
+}
+```
+
+## 📱 Приложения по категориям
+
 ## Медиа плееры
 
 ### MX Player Pro v1.93.4 (armv7)
