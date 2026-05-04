@@ -1,72 +1,87 @@
 {
-  "metadata_version": "1.0",
-  "last_updated": "2026-05-04",
-  "apps": {
-    "Android TV Loader-v1.0.apk": {
-      "name": "Загрузчик",
-      "shortDescription": "Установка приложений из неизвестных источников",
-      "category": "system"
+  "categories": [
+    {
+      "id": "media_players",
+      "name": "Медиаплееры",
+      "icon": "🎬",
+      "apps": [
+        {
+          "fileName": "MX-Player-Pro-1.93.4-armv7.apk",
+          "name": "Плеер",
+          "shortDescription": "Профессиональный видеоплеер"
+        },
+        {
+          "fileName": "VLC-MediaPayer-3.7.0-armv7.apk",
+          "name": "VLC",
+          "shortDescription": "Универсальный медиаплеер"
+        },
+        {
+          "fileName": "Vimu-MediaPlayer-12.00.apk",
+          "name": "Vimu плеер",
+          "shortDescription": "Медиаплеер для Android TV"
+        },
+        {
+          "fileName": "SmartTube-Next-31.57-armv7.apk",
+          "name": "YouTube",
+          "shortDescription": "YouTube без рекламы"
+        }
+      ]
     },
-    "FileManager-Plus-3.7.2.apk": {
-      "name": "Файловый менеджер",
-      "shortDescription": "Управление файлами и сетевыми папками",
-      "category": "file_manager"
+    {
+      "id": "online_cinema",
+      "name": "Онлайн кинотеатры",
+      "icon": "📺",
+      "apps": [
+        {
+          "fileName": "Lampa-1.12.4.apk",
+          "name": "Онлайн-кинотеатр",
+          "shortDescription": "Просмотр фильмов и сериалов онлайн"
+        },
+        {
+          "fileName": "LazyMedia Deluxe-3.445.apk",
+          "name": "Фильмы онлайн",
+          "shortDescription": "Большой выбор фильмов и сериалов"
+        },
+        {
+          "fileName": "TuDiziPlay-1.1.6-armv7.apk",
+          "name": "Турецкие сериалы",
+          "shortDescription": "Сериалы из Турции с субтитрами"
+        },
+        {
+          "fileName": "PrismaTV-1.0.0.apk",
+          "name": "ТВ каналы",
+          "shortDescription": "Просмотр ТВ каналов онлайн"
+        }
+      ]
     },
-    "Lampa-1.12.4.apk": {
-      "name": "Онлайн-кинотеатр",
-      "shortDescription": "Просмотр фильмов и сериалов онлайн",
-      "category": "media_center"
+    {
+      "id": "iptv",
+      "name": "IPTV",
+      "icon": "📡",
+      "apps": [
+        {
+          "fileName": "tivimate-iptv-player-v2_1_5.apk",
+          "name": "IPTV плеер",
+          "shortDescription": "Просмотр IPTV каналов"
+        }
+      ]
     },
-    "LazyMedia Deluxe-3.445.apk": {
-      "name": "Фильмы онлайн",
-      "shortDescription": "Большой выбор фильмов и сериалов",
-      "category": "media_streaming"
-    },
-    "Lift-0.2.38.apk": {
-      "name": "Торрент клиент",
-      "shortDescription": "Загрузка торрентов на Android TV",
-      "category": "torrent"
-    },
-    "MX-Player-Pro-1.93.4-armv7.apk": {
-      "name": "Плеер",
-      "shortDescription": "Профессиональный видеоплеер",
-      "category": "media_player"
-    },
-    "PrismaTV-1.0.0.apk": {
-      "name": "ТВ каналы",
-      "shortDescription": "Просмотр ТВ каналов онлайн",
-      "category": "streaming"
-    },
-    "SmartTube-Next-31.57-armv7.apk": {
-      "name": "YouTube",
-      "shortDescription": "YouTube без рекламы",
-      "category": "media_player"
-    },
-    "TorrServe-Matrix.141.apk": {
-      "name": "Торрент сервер",
-      "shortDescription": "Стриминг торрентов без загрузки",
-      "category": "torrent"
-    },
-    "TuDiziPlay-1.1.6-armv7.apk": {
-      "name": "Турецкие сериалы",
-      "shortDescription": "Сериалы из Турции с субтитрами",
-      "category": "media_streaming"
-    },
-    "VLC-MediaPayer-3.7.0-armv7.apk": {
-      "name": "VLC",
-      "shortDescription": "Универсальный медиаплеер",
-      "category": "media_player"
-    },
-    "Vimu-MediaPlayer-12.00.apk": {
-      "name": "Vimu плеер",
-      "shortDescription": "Медиаплеер для Android TV",
-      "category": "media_player"
-    },
-    "tivimate-iptv-player-v2_1_5.apk": {
-      "name": "IPTV плеер",
-      "shortDescription": "Просмотр IPTV каналов",
-      "category": "iptv"
+    {
+      "id": "file_managers",
+      "name": "Файловые менеджеры",
+      "icon": "📁",
+      "apps": [
+        {
+          "fileName": "FileManager-Plus-3.7.2.apk",
+          "name": "Файловый менеджер",
+          "shortDescription": "Управление файлами и сетевыми папками"
+        },
+        {
+          "fileName": "Android TV Loader-v1.0.apk",
+          "name": "Загрузчик",
+          "shortDescription": "Установка приложений из неизвестных источников"
+        }
+      ]
     }
-  },
-  "metadata_url": "https://raw.githubusercontent.com/aktmaster12-lang/Android-TV/main/apps_metadata.json"
+  ]
 }
