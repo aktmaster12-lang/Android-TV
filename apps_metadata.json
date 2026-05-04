@@ -1,0 +1,366 @@
+{
+  "metadata_version": "1.0",
+  "last_updated": "2026-05-04",
+  "apps": {
+    "Android TV Loader-v1.0.apk": {
+      "name": "Android TV Loader",
+      "version": "1.0",
+      "category": "system",
+      "description": "Утилита для управления приложениями Android TV",
+      "long_description": "Профессиональная утилита для установки и управления сторонними приложениями на Android TV. Позволяет обходить ограничения системы и устанавливать приложения из неизвестных источников.",
+      "features": [
+        "Установка сторонних приложений",
+        "Системные настройки",
+        "Управление правами доступа"
+      ],
+      "size": "8.3 MB",
+      "developer": "Android TV Community",
+      "icon_url": "",
+      "screenshots": [],
+      "rating": 4.2,
+      "downloads": "50K+",
+      "requirements": [
+        "Android TV 5.0+",
+        "1GB RAM"
+      ],
+      "tags": ["system", "utility", "installer"]
+    },
+    "FileManager-Plus-3.7.2.apk": {
+      "name": "FileManager Plus",
+      "version": "3.7.2",
+      "category": "file_manager",
+      "description": "Расширенный файловый менеджер для Android TV",
+      "long_description": "Мощный файловый менеджер с поддержкой сетевых протоколов, облачных хранилищ и архивов. Оптимизирован для управления с пульта дистанционного управления.",
+      "features": [
+        "Работа с сетевыми папками",
+        "Поддержка облачных хранилищ",
+        "Управление архивами",
+        "FTP/SMB протоколы"
+      ],
+      "size": "22.9 MB",
+      "developer": "AlpaleSoft",
+      "icon_url": "",
+      "screenshots": [],
+      "rating": 4.5,
+      "downloads": "100K+",
+      "requirements": [
+        "Android TV 5.0+",
+        "2GB RAM"
+      ],
+      "tags": ["file_manager", "network", "cloud"]
+    },
+    "Lampa-1.12.4.apk": {
+      "name": "Lampa",
+      "version": "1.12.4",
+      "category": "media_center",
+      "description": "Медиацентр с доступом к кинотеатрам",
+      "long_description": "Современный медиацентр с торрент-стримингом и доступом к большому каталогу фильмов и сериалов. Встроенный плеер с поддержкой всех популярных форматов.",
+      "features": [
+        "Торрент-стриминг",
+        "Большой каталог контента",
+        "Встроенный плеер",
+        "Автоматические субтитры"
+      ],
+      "size": "11.7 MB",
+      "developer": "Lampa Team",
+      "icon_url": "",
+      "screenshots": [],
+      "rating": 4.3,
+      "downloads": "500K+",
+      "requirements": [
+        "Android TV 5.0+",
+        "2GB RAM",
+        "Стабильный интернет"
+      ],
+      "tags": ["media_center", "torrent", "streaming", "movies"]
+    },
+    "LazyMedia Deluxe-3.445.apk": {
+      "name": "LazyMedia Deluxe",
+      "version": "3.445",
+      "category": "media_streaming",
+      "description": "Приложение для просмотра фильмов и сериалов",
+      "long_description": "Популярное приложение с огромной базой фильмов и сериалов в высоком качестве. Ежедневное обновление контента и удобный интерфейс для Android TV.",
+      "features": [
+        "Большая база контента",
+        "HD и 4K качество",
+        "Быстрый поиск",
+        "Избранное"
+      ],
+      "size": "11.2 MB",
+      "developer": "LazyMedia Team",
+      "icon_url": "",
+      "screenshots": [],
+      "rating": 4.4,
+      "downloads": "1M+",
+      "requirements": [
+        "Android TV 5.0+",
+        "2GB RAM",
+        "Высокоскоростной интернет"
+      ],
+      "tags": ["streaming", "movies", "series", "hd"]
+    },
+    "Lift-0.2.38.apk": {
+      "name": "Lift",
+      "version": "0.2.38",
+      "category": "torrent",
+      "description": "Легкий торрент-клиент",
+      "long_description": "Минималистичный торрент-клиент, оптимизированный для Android TV. Быстрая загрузка и простое управление с пульта ДУ.",
+      "features": [
+        "Минималистичный интерфейс",
+        "Быстрая загрузка",
+        "Поддержка магнитных ссылок",
+        "Автоматическое скачивание"
+      ],
+      "size": "3.2 MB",
+      "developer": "Lift Dev",
+      "icon_url": "",
+      "screenshots": [],
+      "rating": 4.0,
+      "downloads": "25K+",
+      "requirements": [
+        "Android TV 5.0+",
+        "1GB RAM"
+      ],
+      "tags": ["torrent", "downloader", "minimal"]
+    },
+    "MX-Player-Pro-1.93.4-armv7.apk": {
+      "name": "MX Player Pro",
+      "version": "1.93.4",
+      "category": "media_player",
+      "description": "Профессиональный видеоплеер",
+      "long_description": "Один из лучших видеоплееров для Android с аппаратным ускорением и поддержкой всех популярных форматов. Идеален для Android TV.",
+      "features": [
+        "Аппаратное ускорение",
+        "Поддержка субтитров",
+        "Многоязычный интерфейс",
+        "Декодирование SW"
+      ],
+      "size": "37.1 MB",
+      "developer": "J2 Interactive",
+      "icon_url": "",
+      "screenshots": [],
+      "rating": 4.6,
+      "downloads": "10M+",
+      "requirements": [
+        "Android TV 5.0+",
+        "2GB RAM"
+      ],
+      "tags": ["media_player", "video", "professional", "codecs"]
+    },
+    "PrismaTV-1.0.0.apk": {
+      "name": "PrismaTV",
+      "version": "1.0.0",
+      "category": "streaming",
+      "description": "Мультимедийный сервис для просмотра ТВ контента",
+      "long_description": "Современный стриминговый сервис с доступом к ТВ каналам и видео по запросу. Высокое качество и стабильное вещание.",
+      "features": [
+        "Стриминговые каналы",
+        "Видео по запросу",
+        "HD качество",
+        "Программа передач"
+      ],
+      "size": "12.2 MB",
+      "developer": "Prisma Media",
+      "icon_url": "",
+      "screenshots": [],
+      "rating": 4.1,
+      "downloads": "75K+",
+      "requirements": [
+        "Android TV 5.0+",
+        "2GB RAM",
+        "Стабильный интернет"
+      ],
+      "tags": ["streaming", "tv_channels", "vod"]
+    },
+    "SmartTube-Next-31.57-armv7.apk": {
+      "name": "SmartTube Next",
+      "version": "31.57",
+      "category": "media_player",
+      "description": "Альтернативный клиент YouTube без рекламы",
+      "long_description": "Улучшенный клиент YouTube с блокировкой рекламы, фоновым воспроизведением и поддержкой 4K. Оптимизирован для Android TV.",
+      "features": [
+        "Блокировка рекламы",
+        "Фоновое воспроизведение",
+        "4K поддержка",
+        "Скачивание видео"
+      ],
+      "size": "24.1 MB",
+      "developer": "YTVanced",
+      "icon_url": "",
+      "screenshots": [],
+      "rating": 4.7,
+      "downloads": "5M+",
+      "requirements": [
+        "Android TV 5.0+",
+        "2GB RAM"
+      ],
+      "tags": ["youtube", "ad_block", "4k", "background"]
+    },
+    "TorrServe-Matrix.141.apk": {
+      "name": "TorrServe Matrix",
+      "version": "141",
+      "category": "torrent",
+      "description": "Торрент-сервер для стриминга",
+      "long_description": "Профессиональный торрент-сервер для прямого стриминга торрентов без предварительной загрузки. Поддержка кэширования и быстрая отдача.",
+      "features": [
+        "Прямой стриминг торрентов",
+        "Кэширование",
+        "Высокая скорость",
+        "Поддержка больших файлов"
+      ],
+      "size": "11.9 MB",
+      "developer": "TorrServe Team",
+      "icon_url": "",
+      "screenshots": [],
+      "rating": 4.3,
+      "downloads": "200K+",
+      "requirements": [
+        "Android TV 5.0+",
+        "2GB RAM",
+        "Высокоскоростной интернет"
+      ],
+      "tags": ["torrent", "streaming", "server", "cache"]
+    },
+    "TuDiziPlay-1.1.6-armv7.apk": {
+      "name": "TuDiziPlay",
+      "version": "1.1.6",
+      "category": "media_streaming",
+      "description": "Приложение для просмотра турецких сериалов",
+      "long_description": "Специализированное приложение для просмотра турецких сериалов с субтитрами. Большой выбор контента и высокое качество видео.",
+      "features": [
+        "Турецкие сериалы",
+        "Субтитры",
+        "Высокое качество",
+        "Быстрая загрузка"
+      ],
+      "size": "16.3 MB",
+      "developer": "TuDizi Team",
+      "icon_url": "",
+      "screenshots": [],
+      "rating": 4.2,
+      "downloads": "100K+",
+      "requirements": [
+        "Android TV 5.0+",
+        "2GB RAM",
+        "Стабильный интернет"
+      ],
+      "tags": ["turkish_series", "subtitles", "streaming"]
+    },
+    "VLC-MediaPayer-3.7.0-armv7.apk": {
+      "name": "VLC Media Player",
+      "version": "3.7.0",
+      "category": "media_player",
+      "description": "Универсальный медиаплеер с открытым исходным кодом",
+      "long_description": "Легендарный медиаплеер с поддержкой всех известных кодеков и форматов. Идеален для воспроизведения любого контента на Android TV.",
+      "features": [
+        "Поддержка всех кодеков",
+        "Потоковое вещание",
+        "Сетевые протоколы",
+        "Открытый исходный код"
+      ],
+      "size": "47.2 MB",
+      "developer": "VideoLAN",
+      "icon_url": "",
+      "screenshots": [],
+      "rating": 4.5,
+      "downloads": "10M+",
+      "requirements": [
+        "Android TV 5.0+",
+        "2GB RAM"
+      ],
+      "tags": ["media_player", "open_source", "codecs", "network"]
+    },
+    "Vimu-MediaPlayer-12.00.apk": {
+      "name": "Vimu MediaPlayer",
+      "version": "12.00",
+      "category": "media_player",
+      "description": "Оптимизированный медиаплеер для Android TV",
+      "long_description": "Специально разработанный для Android TV медиаплеер с поддержкой сетевых хранилищ и DLNA. Удобное управление с пульта ДУ.",
+      "features": [
+        "Поддержка сетевых хранилищ",
+        "DLNA поддержка",
+        "Удобное управление",
+        "Автоматическое обнаружение"
+      ],
+      "size": "62.3 MB",
+      "developer": "Vimu Team",
+      "icon_url": "",
+      "screenshots": [],
+      "rating": 4.4,
+      "downloads": "500K+",
+      "requirements": [
+        "Android TV 5.0+",
+        "2GB RAM"
+      ],
+      "tags": ["media_player", "dlna", "network", "tv_optimized"]
+    },
+    "tivimate-iptv-player-v2_1_5.apk": {
+      "name": "TiviMate IPTV Player",
+      "version": "2.1.5",
+      "category": "iptv",
+      "description": "Профессиональный IPTV плеер",
+      "long_description": "Лучший IPTV плеер для Android TV с полноценным EPG, записью передач и поддержкой всех популярных плейлистов.",
+      "features": [
+        "EPG (телегид)",
+        "Запись передач",
+        "Поддержка плейлистов",
+        "Категоризация каналов"
+      ],
+      "size": "10.1 MB",
+      "developer": "TiviMate",
+      "icon_url": "",
+      "screenshots": [],
+      "rating": 4.6,
+      "downloads": "1M+",
+      "requirements": [
+        "Android TV 5.0+",
+        "2GB RAM",
+        "IPTV провайдер"
+      ],
+      "tags": ["iptv", "epg", "recording", "playlists"]
+    }
+  },
+  "categories": {
+    "media_player": {
+      "name": "Медиа плееры",
+      "description": "Приложения для воспроизведения видео и аудио",
+      "icon": "🎬"
+    },
+    "media_center": {
+      "name": "Медиацентры",
+      "description": "Комплексные решения для управления медиаконтентом",
+      "icon": "🏠"
+    },
+    "media_streaming": {
+      "name": "Стриминг сервисы",
+      "description": "Приложения для просмотра онлайн контента",
+      "icon": "📺"
+    },
+    "iptv": {
+      "name": "IPTV",
+      "description": "Приложения для просмотра IP телевидения",
+      "icon": "📡"
+    },
+    "torrent": {
+      "name": "Торренты",
+      "description": "Клиенты для работы с торрент-файлами",
+      "icon": "⬇️"
+    },
+    "file_manager": {
+      "name": "Файловые менеджеры",
+      "description": "Утилиты для управления файлами",
+      "icon": "📁"
+    },
+    "system": {
+      "name": "Системные утилиты",
+      "description": "Инструменты для управления системой",
+      "icon": "⚙️"
+    },
+    "streaming": {
+      "name": "Стриминг",
+      "description": "Сервисы потокового вещания",
+      "icon": "🌐"
+    }
+  },
+  "metadata_url": "https://raw.githubusercontent.com/aktmaster12-lang/Android-TV/main/apps_metadata.json"
+}
