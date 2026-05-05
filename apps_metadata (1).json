@@ -1,0 +1,76 @@
+{
+  "categories": [
+    {
+      "id": "all",
+      "name": "Все приложения",
+      "icon": "📦"
+    },
+    {
+      "id": "cinemas",
+      "name": "Кинотеатры",
+      "icon": "🎬",
+      "apps": [
+        {
+          "fileName": "Lampa-1.12.4.apk"
+        },
+        {
+          "fileName": "Lift-0.2.38.apk"
+        },
+        {
+          "fileName": "LazyMedia Deluxe-3.445.apk"
+        },
+        {
+          "fileName": "PrismaTV-1.0.0.apk"
+        },
+        {
+          "fileName": "SmartTube-Next-31.57-armv7.apk"
+        },
+        {
+          "fileName": "TuDiziPlay-1.1.6-armv7.apk"
+        }
+      ]
+    },
+    {
+      "id": "iptv",
+      "name": "IPTV",
+      "icon": "📡",
+      "apps": [
+        {
+          "fileName": "tivimate-iptv-player-v2_1_5.apk"
+        }
+      ]
+    },
+    {
+      "id": "video_players",
+      "name": "Видеоплееры",
+      "icon": "🎥",
+      "apps": [
+        {
+          "fileName": "MX-Player-Pro-1.93.4-armv7.apk"
+        },
+        {
+          "fileName": "TorrServe-Matrix.141.apk"
+        },
+        {
+          "fileName": "VLC-MediaPayer-3.7.0-armv7.apk"
+        },
+        {
+          "fileName": "Vimu-MediaPlayer-12.00.apk"
+        }
+      ]
+    },
+    {
+      "id": "file_managers",
+      "name": "Файловые менеджеры",
+      "icon": "📁",
+      "apps": [
+        {
+          "fileName": "Android TV Loader-v1.0.apk"
+        },
+        {
+          "fileName": "FileManager-Plus-3.7.2.apk"
+        }
+      ]
+    }
+  ]
+}
