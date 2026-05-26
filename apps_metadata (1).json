@@ -11,22 +11,32 @@
       "icon": "🎬",
       "apps": [
         {
-          "fileName": "Lampa-1.12.4.apk"
+          "fileName": "Lampa-1.12.5.apk",
+          "iconBase64": null
         },
         {
-          "fileName": "Lift-0.2.39.apk"
+          "fileName": "LazyMedia Deluxe-3.452.apk",
+          "iconBase64": null
         },
         {
-          "fileName": "LazyMedia Deluxe-3.445.apk"
+          "fileName": "Lift-0.2.40.apk",
+          "iconBase64": null
         },
         {
-          "fileName": "PrismaTV-1.0.0.apk"
+          "fileName": "Seena-1.4.5.apk",
+          "iconBase64": null
         },
         {
-          "fileName": "SmartTube-Next-31.57-armv7.apk"
+          "fileName": "SmartTube-Next-31.57-armv7.apk",
+          "iconBase64": null
         },
         {
-          "fileName": "TuDiziPlay-1.1.6-armv7.apk"
+          "fileName": "TuDiziPlay-1.1.6-armv7.apk",
+          "iconBase64": null
+        },
+        {
+          "fileName": "PrismaTV-1.2.1.apk",
+          "iconBase64": null
         }
       ]
     },
@@ -36,7 +46,8 @@
       "icon": "📡",
       "apps": [
         {
-          "fileName": "tivimate-iptv-player-v2_1_5.apk"
+          "fileName": "tivimate-iptv-player-v2_1_5.apk",
+          "iconBase64": null
         }
       ]
     },
@@ -46,16 +57,20 @@
       "icon": "🎥",
       "apps": [
         {
-          "fileName": "MX-Player-Pro-1.93.4-armv7.apk"
+          "fileName": "MX-Player-Pro-1.93.4-armv7.apk",
+          "iconBase64": null
         },
         {
-          "fileName": "TorrServe-Matrix.141.apk"
+          "fileName": "TorrServe-Matrix.141.apk",
+          "iconBase64": null
         },
         {
-          "fileName": "VLC-MediaPayer-3.7.0-armv7.apk"
+          "fileName": "VLC-MediaPayer-3.7.0-armv7.apk",
+          "iconBase64": null
         },
         {
-          "fileName": "Vimu-MediaPlayer-12.00.apk"
+          "fileName": "Vimu-MediaPlayer-12.00.apk",
+          "iconBase64": null
         }
       ]
     },
@@ -65,10 +80,12 @@
       "icon": "📁",
       "apps": [
         {
-          "fileName": "Android TV Loader-v1.0.apk"
+          "fileName": "Android TV Loader-v1.0.apk",
+          "iconBase64": null
         },
         {
-          "fileName": "FileManager-Plus-3.7.2.apk"
+          "fileName": "FileManager-Plus-3.7.4.apk",
+          "iconBase64": null
         }
       ]
     }
