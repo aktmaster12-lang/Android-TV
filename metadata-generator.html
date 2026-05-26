@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Генератор метаданных APK с иконками</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .container {
+            width: 100%;
+            min-height: 100vh;
+            background: white;
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 12px;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            font-size: 1.4em;
+            color: #2d3748;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 12px;
+        }
+        
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 24px;
+            margin-top: 24px;
+        }
+        
+        .category-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 20px;
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+        
+        .category-card:hover {
+            border-color: #667eea;
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(102, 126, 234, 0.12);
+        }
+        
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #edf2f7;
+        }
+        
+        .category-icon {
+            font-size: 1.6em;
+        }
+        
+        .category-name {
+            font-size: 1.15em;
+            font-weight: 600;
+            color: #2d3748;
+            flex: 1;
+        }
+        
+        .app-list {
+            min-height: 100px;
+            background: #f7fafc;
+            border-radius: 12px;
+            padding: 12px;
+            border: 2px dashed #e2e8f0;
+            transition: all 0.3s ease;
+        }
+        
+        .app-list.drag-over {
+            border-color: #667eea;
+            background: #ebf4ff;
+        }
+        
+        .app-item {
+            background: white;
+            border: 1px solid #e2e8f0;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            cursor: move;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.2s ease;
+        }
+        
+        .app-item:hover {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transform: translateX(2px);
+        }
+        
+        .app-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            object-fit: cover;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            flex-shrink: 0;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        
+        .app-icon:hover {
+            transform: scale(1.05);
+        }
+        
+        .app-icon img {
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+            object-fit: cover;
+        }
+        
+        .app-info {
+            flex: 1;
+        }
+        
+        .app-file {
+            font-size: 0.8em;
+            color: #718096;
+            font-family: monospace;
+            word-break: break-all;
+        }
+        
+        .app-actions {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-small {
+            padding: 4px 8px;
+            font-size: 0.8em;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-danger {
+            background: linear-gradient(135deg, #fc8181 0%, #f56565 100%);
+            color: white;
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, #68d391 0%, #48bb78 100%);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #4a5568;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .folder-drop-zone {
+            border: 2px dashed #cbd5e0;
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            background: #f7fafc;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .folder-drop-zone:hover {
+            border-color: #667eea;
+            background: #ebf4ff;
+        }
+        
+        .stats {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 16px;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+        }
+        
+        .json-output {
+            width: 100%;
+            min-height: 300px;
+            padding: 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-family: monospace;
+            background: #f7fafc;
+            resize: vertical;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 32px;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+        }
+        
+        .icon-preview {
+            width: 100px;
+            height: 100px;
+            margin: 20px auto;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: white;
+        }
+        
+        .icon-preview img {
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            object-fit: cover;
+        }
+        
+        .drop-zone-icon {
+            border: 2px dashed #cbd5e0;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            background: #f7fafc;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .drop-zone-icon:hover {
+            border-color: #667eea;
+            background: #ebf4ff;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1em;
+        }
+        
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+        
+        .file-list-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .file-list-modal.active {
+            display: flex;
+        }
+        
+        .file-list-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .file-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .file-list li {
+            padding: 8px;
+            margin: 5px 0;
+            background: #f8f9fa;
+            border-radius: 5px;
+            font-family: monospace;
+        }
+        
+        .unassigned {
+            background: #fffbeb;
+            border-color: #f6e05e;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📱 Генератор метаданных APK с иконками</h1>
+            <p>Добавляйте иконки для приложений и генерируйте JSON с base64 изображениями</p>
+        </div>
+        
+        <div class="content">
+            <div class="section">
+                <h2 class="section-title">📝 Шаг 1: Загрузите APK файлы</h2>
+                
+                <div class="folder-drop-zone" id="dropZone">
+                    <div class="folder-icon" style="font-size: 48px; margin-bottom: 10px;">📁</div>
+                    <h3>Перетащите папку сюда</h3>
+                    <p>или</p>
+                    <input type="file" id="folderInput" webkitdirectory directory multiple style="display: none;" onchange="handleFolderSelect(event)">
+                    <input type="file" id="singleFileInput" multiple accept=".apk" style="display: none;" onchange="handleSingleFilesSelect(event)">
+                    <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px;">
+                        <button class="btn btn-primary" onclick="document.getElementById('folderInput').click()">📂 Выбрать папку</button>
+                        <button class="btn btn-success" onclick="document.getElementById('singleFileInput').click()">➕ Добавить APK</button>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 20px;">
+                    <button class="btn btn-secondary" onclick="document.getElementById('jsonInput').click()">📄 Загрузить JSON</button>
+                    <input type="file" id="jsonInput" accept=".json" style="display: none;" onchange="loadExistingJSON(event)">
+                </div>
+                
+                <div id="loadedFilesInfo" style="display: none; margin: 15px 0; padding: 15px; background: #d4edda; border-radius: 10px;">
+                    <strong>✅ Загружено файлов: <span id="loadedFilesCount">0</span></strong>
+                    <button class="btn btn-small btn-secondary" onclick="showFileList()" style="margin-left: 10px;">📋 Показать список</button>
+                </div>
+                
+                <div class="controls">
+                    <button class="btn btn-success" onclick="autoCategorize()">🤖 Авто-категоризация</button>
+                    <button class="btn btn-secondary" onclick="clearAll()">🗑️ Очистить все</button>
+                </div>
+            </div>
+            
+            <div class="stats" id="statsSection" style="display: none;">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalApps">0</div>
+                    <div class="stat-label">Всего приложений</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="assignedApps">0</div>
+                    <div class="stat-label">Распределено</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="unassignedApps">0</div>
+                    <div class="stat-label">Без категории</div>
+                </div>
+            </div>
+            
+            <div class="section" id="categoriesSection" style="display: none;">
+                <h2 class="section-title">🗂️ Шаг 2: Распределите по категориям</h2>
+                <p style="margin-bottom: 20px; color: #666;">💡 Кликните на иконку приложения чтобы загрузить изображение</p>
+                
+                <div class="categories-grid">
+                    <div class="category-card unassigned">
+                        <div class="category-header">
+                            <span class="category-icon">📦</span>
+                            <span class="category-name">Без категории</span>
+                        </div>
+                        <div class="app-list" id="unassignedList" ondrop="drop(event, 'unassigned')" ondragover="allowDrop(event)"></div>
+                    </div>
+                    
+                    <div class="category-card">
+                        <div class="category-header">
+                            <span class="category-icon">🎬</span>
+                            <span class="category-name">Кинотеатры</span>
+                        </div>
+                        <div class="app-list" id="cinemasList" ondrop="drop(event, 'cinemas')" ondragover="allowDrop(event)"></div>
+                    </div>
+                    
+                    <div class="category-card">
+                        <div class="category-header">
+                            <span class="category-icon">📡</span>
+                            <span class="category-name">IPTV</span>
+                        </div>
+                        <div class="app-list" id="iptvList" ondrop="drop(event, 'iptv')" ondragover="allowDrop(event)"></div>
+                    </div>
+                    
+                    <div class="category-card">
+                        <div class="category-header">
+                            <span class="category-icon">🎥</span>
+                            <span class="category-name">Видеоплееры</span>
+                        </div>
+                        <div class="app-list" id="video_playersList" ondrop="drop(event, 'video_players')" ondragover="allowDrop(event)"></div>
+                    </div>
+                    
+                    <div class="category-card">
+                        <div class="category-header">
+                            <span class="category-icon">📁</span>
+                            <span class="category-name">Файловые менеджеры</span>
+                        </div>
+                        <div class="app-list" id="file_managersList" ondrop="drop(event, 'file_managers')" ondragover="allowDrop(event)"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="output-section" id="outputSection" style="display: none;">
+                <h2 class="section-title">📤 Шаг 3: Получите JSON</h2>
+                <div class="controls">
+                    <button class="btn btn-success" onclick="generateJSON()">⚡ Сгенерировать JSON</button>
+                    <button class="btn btn-primary" onclick="copyJSON()">📋 Копировать</button>
+                    <button class="btn btn-secondary" onclick="downloadJSON()">💾 Скачать</button>
+                </div>
+                <textarea class="json-output" id="jsonOutput" placeholder="Нажмите 'Сгенерировать JSON' чтобы увидеть результат..."></textarea>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal for editing app icon -->
+    <div class="modal" id="iconModal">
+        <div class="modal-content">
+            <h3 class="modal-title">🖼️ Иконка приложения</h3>
+            <div id="iconPreview" class="icon-preview">
+                <span>🎯</span>
+            </div>
+            <div class="drop-zone-icon" id="iconDropZone">
+                <p>📸 Перетащите изображение сюда</p>
+                <p>или</p>
+                <button class="btn btn-primary" onclick="document.getElementById('iconFileInput').click()">Выбрать файл</button>
+                <input type="file" id="iconFileInput" accept="image/*" style="display: none;" onchange="uploadIcon(event)">
+            </div>
+            <div class="form-group" style="margin-top: 15px;">
+                <label class="form-label">Или введите URL иконки:</label>
+                <input type="text" class="form-input" id="iconUrl" placeholder="https://example.com/icon.png">
+                <button class="btn btn-primary" onclick="loadIconFromUrl()" style="margin-top: 10px;">Загрузить по URL</button>
+            </div>
+            <div class="modal-buttons">
+                <button class="btn btn-secondary" onclick="removeIcon()">🗑️ Удалить иконку</button>
+                <button class="btn btn-primary" onclick="closeIconModal()">Готово</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let apps = [];
+        let currentIconAppId = null;
+        let loadedFileNames = [];
+        
+        const categories = {
+            'cinemas': { id: 'cinemas', name: 'Кинотеатры', icon: '🎬', apps: [] },
+            'iptv': { id: 'iptv', name: 'IPTV', icon: '📡', apps: [] },
+            'video_players': { id: 'video_players', name: 'Видеоплееры', icon: '🎥', apps: [] },
+            'file_managers': { id: 'file_managers', name: 'Файловые менеджеры', icon: '📁', apps: [] },
+            'unassigned': { id: 'unassigned', name: 'Без категории', icon: '📦', apps: [] }
+        };
+        
+        // Drag and drop for folder
+        const dropZone = document.getElementById('dropZone');
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('drag-over');
+        });
+        
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('drag-over');
+        });
+        
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('drag-over');
+            const items = e.dataTransfer.items;
+            for (let i = 0; i < items.length; i++) {
+                const item = items[i].webkitGetAsEntry();
+                if (item && item.isDirectory) {
+                    scanDirectory(item);
+                    break;
+                }
+            }
+        });
+        
+        // Icon upload drop zone
+        const iconDropZone = document.getElementById('iconDropZone');
+        iconDropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            iconDropZone.style.borderColor = '#667eea';
+            iconDropZone.style.background = '#ebf4ff';
+        });
+        
+        iconDropZone.addEventListener('dragleave', () => {
+            iconDropZone.style.borderColor = '#cbd5e0';
+            iconDropZone.style.background = '#f7fafc';
+        });
+        
+        iconDropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            iconDropZone.style.borderColor = '#cbd5e0';
+            iconDropZone.style.background = '#f7fafc';
+            const file = e.dataTransfer.files[0];
+            if (file && file.type.startsWith('image/')) {
+                handleIconUpload(file);
+            }
+        });
+        
+        function scanDirectory(directoryEntry) {
+            const apkFiles = [];
+            const reader = directoryEntry.createReader();
+            
+            function readEntries() {
+                reader.readEntries((entries) => {
+                    if (entries.length === 0) {
+                        if (apkFiles.length > 0) {
+                            loadedFileNames = apkFiles.sort();
+                            loadApkFilesFromArray(loadedFileNames);
+                        } else {
+                            alert('В папке не найдено APK файлов');
+                        }
+                        return;
+                    }
+                    
+                    entries.forEach((entry) => {
+                        if (entry.isFile && entry.name.endsWith('.apk')) {
+                            apkFiles.push(entry.name);
+                        }
+                    });
+                    readEntries();
+                });
+            }
+            readEntries();
+        }
+        
+        function handleFolderSelect(event) {
+            const files = event.target.files;
+            const apkFiles = [];
+            for (let i = 0; i < files.length; i++) {
+                if (files[i].name.endsWith('.apk')) {
+                    apkFiles.push(files[i].name);
+                }
+            }
+            if (apkFiles.length > 0) {
+                loadedFileNames = apkFiles.sort();
+                loadApkFilesFromArray(loadedFileNames);
+            } else {
+                alert('В папке не найдено APK файлов');
+            }
+        }
+        
+        function handleSingleFilesSelect(event) {
+            const files = event.target.files;
+            const newApkFiles = [];
+            for (let i = 0; i < files.length; i++) {
+                if (files[i].name.endsWith('.apk') && !loadedFileNames.includes(files[i].name)) {
+                    newApkFiles.push(files[i].name);
+                }
+            }
+            if (newApkFiles.length > 0) {
+                loadedFileNames = [...loadedFileNames, ...newApkFiles].sort();
+                loadApkFilesFromArray(loadedFileNames);
+            }
+            event.target.value = '';
+        }
+        
+        function loadApkFilesFromArray(fileNames) {
+            const existingAppsMap = new Map();
+            apps.forEach(app => existingAppsMap.set(app.fileName, app));
+            
+            apps = fileNames.map((fileName, index) => {
+                const existing = existingAppsMap.get(fileName);
+                if (existing) {
+                    return { ...existing, id: index };
+                }
+                return {
+                    id: index,
+                    fileName: fileName,
+                    category: 'unassigned',
+                    name: generateName(fileName),
+                    shortDescription: generateDescription(fileName),
+                    iconBase64: null
+                };
+            });
+            
+            Object.keys(categories).forEach(key => categories[key].apps = []);
+            
+            apps.forEach(app => {
+                const category = categories[app.category];
+                if (category) {
+                    category.apps.push(app);
+                } else {
+                    app.category = 'unassigned';
+                    categories.unassigned.apps.push(app);
+                }
+            });
+            
+            renderApps();
+            updateStats();
+            document.getElementById('categoriesSection').style.display = 'block';
+            document.getElementById('statsSection').style.display = 'flex';
+            document.getElementById('outputSection').style.display = 'block';
+            document.getElementById('loadedFilesInfo').style.display = 'block';
+            document.getElementById('loadedFilesCount').textContent = fileNames.length;
+        }
+        
+        function generateName(fileName) {
+            const names = {
+                'MX-Player': 'Плеер', 'VLC': 'VLC', 'Vimu': 'Vimu плеер',
+                'SmartTube': 'YouTube', 'LazyMedia': 'Фильмы онлайн',
+                'tivimate': 'IPTV плеер', 'FileManager': 'Файловый менеджер'
+            };
+            for (let key in names) {
+                if (fileName.includes(key)) return names[key];
+            }
+            return fileName.replace('.apk', '').split('-')[0];
+        }
+        
+        function generateDescription(fileName) {
+            const descriptions = {
+                'MX-Player': 'Профессиональный видеоплеер',
+                'VLC': 'Универсальный медиаплеер',
+                'SmartTube': 'YouTube без рекламы',
+                'tivimate': 'Просмотр IPTV каналов'
+            };
+            for (let key in descriptions) {
+                if (fileName.includes(key)) return descriptions[key];
+            }
+            return 'Приложение для Android TV';
+        }
+        
+        function renderApps() {
+            Object.keys(categories).forEach(key => {
+                const list = document.getElementById(key + 'List');
+                if (list) {
+                    list.innerHTML = categories[key].apps.map(app => `
+                        <div class="app-item" draggable="true" ondragstart="drag(event, ${app.id})" data-id="${app.id}">
+                            <div class="app-icon" onclick="openIconModal(${app.id})">
+                                ${app.iconBase64 ? `<img src="${app.iconBase64}" alt="icon">` : `<span>${getDefaultIcon(app.category)}</span>`}
+                            </div>
+                            <div class="app-info">
+                                <div class="app-file">${escapeHtml(app.fileName)}</div>
+                            </div>
+                            <div class="app-actions">
+                                <button class="btn btn-small btn-danger" onclick="deleteApp(${app.id})">🗑️</button>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+            });
+        }
+        
+        function getDefaultIcon(category) {
+            const icons = {
+                'cinemas': '🎬', 'iptv': '📡', 'video_players': '🎥',
+                'file_managers': '📁', 'unassigned': '📦'
+            };
+            return icons[category] || '📱';
+        }
+        
+        function escapeHtml(str) {
+            return str.replace(/[&<>]/g, function(m) {
+                if (m === '&') return '&amp;';
+                if (m === '<') return '&lt;';
+                if (m === '>') return '&gt;';
+                return m;
+            });
+        }
+        
+        function openIconModal(appId) {
+            currentIconAppId = appId;
+            const app = apps.find(a => a.id === appId);
+            const preview = document.getElementById('iconPreview');
+            if (app.iconBase64) {
+                preview.innerHTML = `<img src="${app.iconBase64}" alt="icon">`;
+            } else {
+                preview.innerHTML = `<span>${getDefaultIcon(app.category)}</span>`;
+            }
+            document.getElementById('iconUrl').value = '';
+            document.getElementById('iconModal').classList.add('active');
+        }
+        
+        function handleIconUpload(file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const app = apps.find(a => a.id === currentIconAppId);
+                if (app) {
+                    app.iconBase64 = e.target.result;
+                    renderApps();
+                    const preview = document.getElementById('iconPreview');
+                    preview.innerHTML = `<img src="${app.iconBase64}" alt="icon">`;
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+        
+        function uploadIcon(event) {
+            const file = event.target.files[0];
+            if (file) handleIconUpload(file);
+        }
+        
+        function loadIconFromUrl() {
+            const url = document.getElementById('iconUrl').value;
+            if (url) {
+                const app = apps.find(a => a.id === currentIconAppId);
+                if (app) {
+                    app.iconBase64 = url;
+                    renderApps();
+                    const preview = document.getElementById('iconPreview');
+                    preview.innerHTML = `<img src="${url}" alt="icon" onerror="this.src=''">`;
+                }
+            }
+        }
+        
+        function removeIcon() {
+            const app = apps.find(a => a.id === currentIconAppId);
+            if (app) {
+                app.iconBase64 = null;
+                renderApps();
+                const preview = document.getElementById('iconPreview');
+                preview.innerHTML = `<span>${getDefaultIcon(app.category)}</span>`;
+            }
+        }
+        
+        function closeIconModal() {
+            document.getElementById('iconModal').classList.remove('active');
+            currentIconAppId = null;
+        }
+        
+        function autoCategorize() {
+            const rules = {
+                'cinemas': ['Lampa', 'LazyMedia', 'TuDiziPlay'],
+                'iptv': ['tivimate'],
+                'video_players': ['MX-Player', 'VLC', 'Vimu', 'SmartTube'],
+                'file_managers': ['FileManager', 'Android TV Loader']
+            };
+            
+            Object.keys(categories).forEach(key => categories[key].apps = []);
+            
+            apps.forEach(app => {
+                let assigned = false;
+                for (let [category, keywords] of Object.entries(rules)) {
+                    if (keywords.some(keyword => app.fileName.includes(keyword))) {
+                        app.category = category;
+                        categories[category].apps.push(app);
+                        assigned = true;
+                        break;
+                    }
+                }
+                if (!assigned) {
+                    app.category = 'unassigned';
+                    categories.unassigned.apps.push(app);
+                }
+            });
+            renderApps();
+            updateStats();
+        }
+        
+        function drag(ev, appId) {
+            ev.dataTransfer.setData("appId", appId);
+        }
+        
+        function allowDrop(ev) {
+            ev.preventDefault();
+            ev.currentTarget.classList.add('drag-over');
+        }
+        
+        function drop(ev, category) {
+            ev.preventDefault();
+            ev.currentTarget.classList.remove('drag-over');
+            const appId = parseInt(ev.dataTransfer.getData("appId"));
+            const app = apps.find(a => a.id === appId);
+            
+            if (app && app.category !== category) {
+                const oldCategory = categories[app.category];
+                oldCategory.apps = oldCategory.apps.filter(a => a.id !== appId);
+                app.category = category;
+                categories[category].apps.push(app);
+                renderApps();
+                updateStats();
+            }
+        }
+        
+        function deleteApp(appId) {
+            if (confirm('Удалить это приложение?')) {
+                const app = apps.find(a => a.id === appId);
+                if (app) {
+                    const category = categories[app.category];
+                    category.apps = category.apps.filter(a => a.id !== appId);
+                    apps = apps.filter(a => a.id !== appId);
+                    loadedFileNames = loadedFileNames.filter(n => n !== app.fileName);
+                    renderApps();
+                    updateStats();
+                    document.getElementById('loadedFilesCount').textContent = loadedFileNames.length;
+                    if (apps.length === 0) {
+                        document.getElementById('categoriesSection').style.display = 'none';
+                        document.getElementById('statsSection').style.display = 'none';
+                        document.getElementById('outputSection').style.display = 'none';
+                        document.getElementById('loadedFilesInfo').style.display = 'none';
+                    }
+                }
+            }
+        }
+        
+        function updateStats() {
+            const total = apps.length;
+            const unassigned = categories.unassigned.apps.length;
+            document.getElementById('totalApps').textContent = total;
+            document.getElementById('assignedApps').textContent = total - unassigned;
+            document.getElementById('unassignedApps').textContent = unassigned;
+        }
+        
+        function generateJSON() {
+            const output = {
+                categories: [
+                    { id: 'all', name: 'Все приложения', icon: '📦' },
+                    {
+                        id: 'cinemas',
+                        name: 'Кинотеатры',
+                        icon: '🎬',
+                        apps: categories.cinemas.apps.map(app => ({
+                            fileName: app.fileName,
+                            iconBase64: app.iconBase64 || null
+                        }))
+                    },
+                    {
+                        id: 'iptv',
+                        name: 'IPTV',
+                        icon: '📡',
+                        apps: categories.iptv.apps.map(app => ({
+                            fileName: app.fileName,
+                            iconBase64: app.iconBase64 || null
+                        }))
+                    },
+                    {
+                        id: 'video_players',
+                        name: 'Видеоплееры',
+                        icon: '🎥',
+                        apps: categories.video_players.apps.map(app => ({
+                            fileName: app.fileName,
+                            iconBase64: app.iconBase64 || null
+                        }))
+                    },
+                    {
+                        id: 'file_managers',
+                        name: 'Файловые менеджеры',
+                        icon: '📁',
+                        apps: categories.file_managers.apps.map(app => ({
+                            fileName: app.fileName,
+                            iconBase64: app.iconBase64 || null
+                        }))
+                    }
+                ]
+            };
+            document.getElementById('jsonOutput').value = JSON.stringify(output, null, 2);
+        }
+        
+        function copyJSON() {
+            const output = document.getElementById('jsonOutput');
+            if (!output.value) {
+                alert('Сначала сгенерируйте JSON!');
+                return;
+            }
+            output.select();
+            document.execCommand('copy');
+            alert('JSON скопирован!');
+        }
+        
+        function downloadJSON() {
+            const output = document.getElementById('jsonOutput').value;
+            if (!output) {
+                alert('Сначала сгенерируйте JSON!');
+                return;
+            }
+            const blob = new Blob([output], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'apps_metadata.json';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+        
+        function clearAll() {
+            if (confirm('Очистить все данные?')) {
+                apps = [];
+                loadedFileNames = [];
+                Object.keys(categories).forEach(key => categories[key].apps = []);
+                document.getElementById('categoriesSection').style.display = 'none';
+                document.getElementById('statsSection').style.display = 'none';
+                document.getElementById('outputSection').style.display = 'none';
+                document.getElementById('loadedFilesInfo').style.display = 'none';
+                document.getElementById('jsonOutput').value = '';
+            }
+        }
+        
+        function showFileList() {
+            const modal = document.createElement('div');
+            modal.className = 'file-list-modal active';
+            modal.innerHTML = `
+                <div class="file-list-content">
+                    <h3>📋 APK файлы (${loadedFileNames.length})</h3>
+                    <ul class="file-list">${loadedFileNames.map(n => `<li>${n}</li>`).join('')}</ul>
+                    <button class="btn btn-secondary" onclick="this.closest('.file-list-modal').remove()">Закрыть</button>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+        
+        function loadExistingJSON(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    apps = [];
+                    loadedFileNames = [];
+                    Object.keys(categories).forEach(key => categories[key].apps = []);
+                    
+                    if (data.categories) {
+                        let appId = 0;
+                        data.categories.forEach(category => {
+                            if (category.id !== 'all' && category.apps) {
+                                const categoryKey = category.id;
+                                if (categories[categoryKey]) {
+                                    category.apps.forEach(appData => {
+                                        const app = {
+                                            id: appId++,
+                                            fileName: appData.fileName,
+                                            category: categoryKey,
+                                            name: generateName(appData.fileName),
+                                            shortDescription: generateDescription(appData.fileName),
+                                            iconBase64: appData.iconBase64 || null
+                                        };
+                                        apps.push(app);
+                                        categories[categoryKey].apps.push(app);
+                                        loadedFileNames.push(appData.fileName);
+                                    });
+                                }
+                            }
+                        });
+                    }
+                    
+                    document.getElementById('categoriesSection').style.display = 'block';
+                    document.getElementById('statsSection').style.display = 'flex';
+                    document.getElementById('outputSection').style.display = 'block';
+                    renderApps();
+                    updateStats();
+                    document.getElementById('loadedFilesCount').textContent = loadedFileNames.length;
+                    document.getElementById('loadedFilesInfo').style.display = 'block';
+                    generateJSON();
+                    alert('JSON успешно загружен!');
+                } catch (error) {
+                    alert('Ошибка: ' + error.message);
+                }
+            };
+            reader.readAsText(file);
+            event.target.value = '';
+        }
+        
+        document.getElementById('iconModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('iconModal')) closeIconModal();
+        });
+    </script>
+</body>
+</html>
